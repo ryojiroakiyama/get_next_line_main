@@ -1,35 +1,9 @@
-#include "get_next_line.h"
+#include "../get_next_line.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
-/*
-static	char	*ft_strcpy(char *dest, const char *src)
-{
-	size_t	i;
 
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-char	*ft_strdup(const char *src)
-{
-	char	*dest;
-	size_t	src_len;
-
-	src_len = ft_strlen(src);
-	dest = (char *)malloc(sizeof(char) * (src_len + 1));
-	if (!dest)
-		return (NULL);
-	return (ft_strcpy(dest, src));
-}
-*/
 void	extend(char ***ans, int cnt, char *line)
 {
 	char **tmp;
@@ -45,7 +19,7 @@ void	extend(char ***ans, int cnt, char *line)
 	}
 	(*ans)[i] = line;
 	(*ans)[++i] = NULL;
-	free(tmp);
+	free((char *)tmp);
 }
 
 int	main(void)
@@ -72,11 +46,12 @@ int	main(void)
 	while (ans[cnt - 1] != NULL)
 	{
 		printf("cnt:%d\nline:%s\n", cnt, ans[cnt - 1]);
+		put_mf();
 		printf("------------------------\n");
 		free(ans[cnt - 1]);
 		cnt++;
 	}
-	free(ans);
+	free((char *)ans);
 
 	put_mf();
 	system("leaks a.out");

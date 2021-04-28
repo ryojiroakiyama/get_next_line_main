@@ -1,4 +1,4 @@
-#include "get_next_line.h"
+#include "../get_next_line.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -7,22 +7,32 @@
 int	main(int argc, char *argv[])
 {
 	char *line;
-	int	sign = 1;
-	int fd;
-	int cnt = 1;
 	char *file;
+	int i;
+	int cnt = 1;
+	int fd;
+	int	sign = 1;
+	int	fd_b[5];
+	int sign_b[5] = {0, 0, 0, 0, 0};
 
-//	file = argv[argc - 1];
-	file = argv[1];
-	fd = open(file, O_RDONLY);
-	if (argv[argc - 1][0] == '0')
+	if (argc == 1)
 	{
+		printf("no file\n");
+		return (0);
+	}
+	if (argc == 3 && argv[2][0] == '0')//line == NULL section
+	{
+		file = argv[1];
+		fd = open(file, O_RDONLY);
 		sign = get_next_line(fd, 0);
 		printf("sign:%d\n", sign);
 		printf("------------------------\n");
+		close(fd);
 	}
-	else
+	else if (argc == 2)//mandatory section
 	{
+		file = argv[1];
+		fd = open(file, O_RDONLY);
 		while (sign != 0)
 		{
 			sign = get_next_line(fd, &line);
@@ -37,10 +47,45 @@ int	main(int argc, char *argv[])
 		free(line);
 		put_mf();
 		printf("------------------------\n");
+		close(fd);
 	}
-	close(fd);
+	else if (argc <= 6)//bonus section
+	{
+		i = 0;
+		while (i + 1 < argc)
+		{
+			file = argv[i + 1];
+			fd_b[i] = open(file, O_RDONLY);
+			i++;
+		}
+		cnt = 1;
+		sign_b[0] = 1;
+		while (sign_b[0] != 0 || sign_b[1] != 0 || sign_b[2] != 0 || sign_b[3] != 0 || sign_b[4] != 0)
+		{
+			i = 0;
+			while (i + 1 < argc)
+			{
+				printf("==>%s<==\n", argv[i + 1]);
+				sign_b[i] = get_next_line(fd_b[i], &line);
+				printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign_b[i], line);
+				printf("------------------------\n");
+				free(line);
+				put_mf();
+				i++;
+			}
+			cnt++;
+		}
+		i = 0;
+		while (i + 1 < argc)
+		{
+			close(fd_b[i]);
+			i++;
+		}
+	}
+	else
+		printf("too many files\n");
 
-	/*
+/*
 	(void)argc;
 	(void)argv;
 	file = "../Get_Next_Line_Tester/test/normal.txt";
