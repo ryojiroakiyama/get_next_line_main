@@ -1,4 +1,4 @@
-#include "../gnl/get_next_line.h"
+#include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -78,6 +78,7 @@ int	main(void)
 	}
 	free(ans);
 
+	put_mf();
 	system("leaks a.out");
 	return (0);
 }
