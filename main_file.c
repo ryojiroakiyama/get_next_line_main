@@ -10,6 +10,7 @@ int	main(int argc, char *argv[])
 	char *file;
 	int i;
 	int cnt = 1;
+	int original_fd;
 	int fd;
 	int	sign = 1;
 	int	fd_b[5];
@@ -28,6 +29,24 @@ int	main(int argc, char *argv[])
 		printf("sign:%d\n", sign);
 		printf("------------------------\n");
 		close(fd);
+	}
+	else if (argc == 3 && '1' <= argv[2][0] && argv[2][0] <= '9')//set invalid fd when specified cnt
+	{
+		file = argv[1];
+		fd = open(file, O_RDONLY);
+		original_fd = fd;
+		while (sign == 1)
+		{
+			if (cnt == argv[2][0] - '0')
+				fd += 1;
+			sign = get_next_line(fd, &line);
+			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
+			cnt++;
+			free(line);
+			put_mf();
+			printf("------------------------\n");
+		}
+		close(original_fd);
 	}
 	else if (argc == 2)//mandatory section
 	{
