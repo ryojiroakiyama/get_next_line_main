@@ -63,12 +63,12 @@ int	main(int argc, char *argv[])
 			free(line);
 //			put_mf();
 		}
-/*		sign = get_next_line(fd, &line);//for comfirm action when recall
+		sign = get_next_line(fd, &line);//for comfirm action when recall
 		printf("one more\nsign:%d\nline:%s\n", sign, line);
 		free(line);
 		put_mf();
 		printf("------------------------\n");
-*/		close(fd);
+		close(fd);
 	}
 	else if (argc <= 6)//bonus section
 	{
@@ -107,13 +107,16 @@ int	main(int argc, char *argv[])
 
 	printf("-----------------------------");
 	put_judge();
-//	system("leaks a.out");
-	return (0);
-}
-/*for valgrind part
+/*
+//	for valgrind part
 	(void)argc;
 	(void)argv;
-	file = "../Get_Next_Line_Tester/test/normal.txt";
+	char *file;
+	int	fd;
+	char *line;
+	int sign = 1;
+	int cnt = 1;
+	file = "./random";
 	fd = open(file, O_RDONLY);
 	while (sign != 0)
 	{
@@ -129,3 +132,6 @@ int	main(int argc, char *argv[])
 	free(line);
 	close(fd);
 */
+	system("leaks a.out");
+	return (0);
+}
