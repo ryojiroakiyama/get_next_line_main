@@ -25,9 +25,9 @@ int	main(int argc, char *argv[])
 	{
 		file = argv[1];
 		fd = open(file, O_RDONLY);
+		printf("==>%s<==\n", file);
 		sign = get_next_line(fd, 0);
 		printf("sign:%d\n", sign);
-		printf("------------------------\n");
 		close(fd);
 	}
 	else if (argc == 3 && '1' <= argv[2][0] && argv[2][0] <= '9')//set invalid fd when specified cnt
@@ -37,14 +37,16 @@ int	main(int argc, char *argv[])
 		original_fd = fd;
 		while (sign == 1)
 		{
+			printf("==>%s<==\n", file);
 			if (cnt == argv[2][0] - '0')
 				fd += 1;
 			sign = get_next_line(fd, &line);
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
-			put_mf();
-			printf("------------------------\n");
+//			put_mf();
+			if (sign == -1)
+				printf("error detected\n");
 		}
 		close(original_fd);
 	}
@@ -52,21 +54,21 @@ int	main(int argc, char *argv[])
 	{
 		file = argv[1];
 		fd = open(file, O_RDONLY);
-		while (sign != 0)
+		while (sign == 1)
 		{
 			sign = get_next_line(fd, &line);
+			printf("==>%s<==\n", file);
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
-			put_mf();
-			printf("------------------------\n");
+//			put_mf();
 		}
-		sign = get_next_line(fd, &line);
+/*		sign = get_next_line(fd, &line);//for comfirm action when recall
 		printf("one more\nsign:%d\nline:%s\n", sign, line);
 		free(line);
 		put_mf();
 		printf("------------------------\n");
-		close(fd);
+*/		close(fd);
 	}
 	else if (argc <= 6)//bonus section
 	{
@@ -87,9 +89,8 @@ int	main(int argc, char *argv[])
 				printf("==>%s<==\n", argv[i + 1]);
 				sign_b[i] = get_next_line(fd_b[i], &line);
 				printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign_b[i], line);
-				printf("------------------------\n");
 				free(line);
-				put_mf();
+//				put_mf();
 				i++;
 			}
 			cnt++;
@@ -104,7 +105,12 @@ int	main(int argc, char *argv[])
 	else
 		printf("too many files\n");
 
-/*
+	printf("-----------------------------");
+	put_judge();
+//	system("leaks a.out");
+	return (0);
+}
+/*for valgrind part
 	(void)argc;
 	(void)argv;
 	file = "../Get_Next_Line_Tester/test/normal.txt";
@@ -123,7 +129,3 @@ int	main(int argc, char *argv[])
 	free(line);
 	close(fd);
 */
-
-	system("leaks a.out");
-	return (0);
-}

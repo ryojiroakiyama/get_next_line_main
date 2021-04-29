@@ -24,6 +24,21 @@ void	cnt_free(char *f)
 
 void	put_mf(void)
 {
-	printf("cnt_m:%d\n", cnt_m);
-	printf("cnt_f:%d\n", cnt_f);
+	printf("malloc:%d\n", cnt_m);
+	printf("free:%d\n", cnt_f);
+}
+
+void	put_judge(void)
+{
+	if (cnt_m == cnt_f)
+	{
+		printf("\x1b[32m");
+		printf("leak ok\n");
+	}
+	else
+	{
+		printf("\x1b[31m");
+		printf("leak maybe");
+	}
+	printf("\x1b[0m");
 }
