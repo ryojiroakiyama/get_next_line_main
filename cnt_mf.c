@@ -2,11 +2,17 @@
 
 static	int	cnt_m = 0;
 static	int	cnt_f = 0;
+static	int mindex = 0;
+
+void	let_malloc_fail(void)
+{
+	mindex = (int)random() % 10;
+}
 
 char	*cnt_malloc(size_t size)
 {
 	char	*ans;
-	ans = malloc(size);
+	ans = mindex < 8 ? malloc(size) : NULL;
 	if (!ans)
 		return (NULL);
 	cnt_m++;

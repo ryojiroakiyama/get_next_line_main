@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 		printf("sign:%d\n", sign);
 		close(fd);
 	}
-	else if (argc == 3 && '1' <= argv[2][0] && argv[2][0] <= '9')//set invalid fd when specified cnt
+	else if (argc == 3 && argv[2][0] == 'r' && argv[2][1] == 'f')//let read faile section
 	{
 		file = argv[1];
 		fd = open(file, O_RDONLY);
@@ -38,7 +38,7 @@ int	main(int argc, char *argv[])
 		while (sign == 1)
 		{
 			printf("==>%s<==\n", file);
-			if (cnt == argv[2][0] - '0')
+			if ((int)random() % 10 > 7)
 				fd += 1;
 			sign = get_next_line(fd, &line);
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
@@ -46,7 +46,34 @@ int	main(int argc, char *argv[])
 			free(line);
 //			put_mf();
 			if (sign == -1)
+			{
+				printf("\x1b[31m");
 				printf("error detected\n");
+				printf("\x1b[0m");
+			}
+		}
+		close(original_fd);
+	}
+	else if (argc == 3 && argv[2][0] == 'm' && argv[2][1] == 'f')//let malloc faile section
+	{
+		file = argv[1];
+		fd = open(file, O_RDONLY);
+		original_fd = fd;
+		while (sign == 1)
+		{
+			printf("==>%s<==\n", file);
+			let_malloc_fail();
+			sign = get_next_line(fd, &line);
+			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
+			cnt++;
+			free(line);
+//			put_mf();
+			if (sign == -1)
+			{
+				printf("\x1b[31m");
+				printf("error detected\n");
+				printf("\x1b[0m");
+			}
 		}
 		close(original_fd);
 	}
