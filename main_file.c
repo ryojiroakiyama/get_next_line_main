@@ -44,7 +44,7 @@ int	main(int argc, char *argv[])
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
-//			put_mf();
+			put_mf();
 			if (sign == -1)
 			{
 				printf("\x1b[31m");
@@ -67,7 +67,7 @@ int	main(int argc, char *argv[])
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
-//			put_mf();
+			put_mf();
 			if (sign == -1)
 			{
 				printf("\x1b[31m");
@@ -88,7 +88,7 @@ int	main(int argc, char *argv[])
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
-//			put_mf();
+			put_mf();
 		}
 		sign = get_next_line(fd, &line);//for comfirm action when recall
 		printf("one more\nsign:%d\nline:%s\n", sign, line);
@@ -117,7 +117,7 @@ int	main(int argc, char *argv[])
 				sign_b[i] = get_next_line(fd_b[i], &line);
 				printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign_b[i], line);
 				free(line);
-//				put_mf();
+				put_mf();
 				i++;
 			}
 			cnt++;
