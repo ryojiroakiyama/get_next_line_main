@@ -46,16 +46,12 @@ int	main(void)
 	while (ans[cnt - 1] != NULL)
 	{
 		printf("cnt:%d\nline:%s\n", cnt, ans[cnt - 1]);
-		put_mf();
 		printf("-----\n");
 		free(ans[cnt - 1]);
 		cnt++;
 	}
 	free((char *)ans);
 
-//	put_mf();
-	printf("------------------------------");
-	put_judge();
 	system("leaks a.out");
 	return (0);
 }
