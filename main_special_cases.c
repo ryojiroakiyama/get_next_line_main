@@ -43,6 +43,7 @@ int	main(int argc, char *argv[])
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
+			line = NULL;
 			put_mf();
 			if (sign == -1)
 			{
@@ -67,6 +68,7 @@ int	main(int argc, char *argv[])
 			printf("cnt:%d\nsign:%d\nline:%s\n", cnt, sign, line);
 			cnt++;
 			free(line);
+			line = NULL;
 			put_mf();
 			if (sign == -1)
 			{

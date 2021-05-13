@@ -44,7 +44,9 @@ void	put_judge(void)
 	else
 	{
 		printf("\x1b[31m");
-		printf("leak maybe");
+		printf("leak maybe, if the difference is one(because of static), It's ok\n");
+		printf("malloc:%d\n", cnt_m);
+		printf("free:%d\n", cnt_f);
 	}
 	printf("\x1b[0m");
 }
