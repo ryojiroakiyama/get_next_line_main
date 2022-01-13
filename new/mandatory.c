@@ -1,11 +1,11 @@
-#include "../get_next_line.h"
+#include "get_next_line.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-//gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c.
+//gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c -I <headerdir>
 
 int	main(int argc, char *argv[])
 {
