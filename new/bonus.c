@@ -5,25 +5,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c -I <headerdir>
-
 int	main(int argc, char *argv[])
 {
 	char *line;
-	char *file;
+	char *file1;
 	char *file2;
-	int fd;
+	int fd1;
 	int fd2;
 
 	if (argc == 3)
 	{
-		file = argv[1];
+		file1 = argv[1];
 		file2 = argv[2];
-		fd = open(file, O_RDONLY);
+		fd1 = open(file1, O_RDONLY);
 		fd2 = open(file2, O_RDONLY);
 		while (1)
 		{
-			line = get_next_line(fd);
+			line = get_next_line(fd1);
 			if (line)
 				printf("%s", line);
 			else
@@ -36,7 +34,7 @@ int	main(int argc, char *argv[])
 				break;
 			free(line);
 		}
-		close(fd);
+		close(fd1);
 		close(fd2);
 	}
 	if (system("leaks a.out > /dev/null"))

@@ -5,8 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 <files>.c -I <headerdir>
-
 int	main(int argc, char *argv[])
 {
 	char *line;
